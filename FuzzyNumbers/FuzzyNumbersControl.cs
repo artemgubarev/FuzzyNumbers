@@ -5,9 +5,9 @@ using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using DevExpress.Data.Mask.Internal;
 
 namespace FuzzyNumbers
 {
@@ -199,10 +199,26 @@ namespace FuzzyNumbers
             var A = GetMatrix(_Anumber);
             var B = GetMatrix(_Bnumber);
 
-            string compareValue = FuzzyNumbersCalculator.Compare(A, B);
-            
-            richTextBox.Clear();
-            richTextBox.AppendText(compareValue);
+            var compareValue = FuzzyNumbersCalculator.Compare(A, B);
+
+            var buttons = new Dictionary<string, SimpleButton>()
+            {
+                { ">", moreButton },
+                { ">=", moreOrEqualButton },
+                { "<", lessButton },
+                { "<=", lessOrEqualButton },
+                { "=", equalButton },
+                { "!=", noEqualButton},
+            };
+
+            foreach (var button in buttons)
+            {
+                button.Value.Appearance.BackColor = Color.Red;
+                if (compareValue.Contains(button.Key))
+                {
+                    button.Value.Appearance.BackColor = Color.Green;
+                }
+            }
         }
     }
 }

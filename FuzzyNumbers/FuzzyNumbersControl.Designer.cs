@@ -54,9 +54,13 @@
             this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel5 = new DevExpress.Utils.Layout.TablePanel();
+            this.lessButton = new DevExpress.XtraEditors.SimpleButton();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            this.compareLabel = new DevExpress.XtraEditors.LabelControl();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.moreButton = new DevExpress.XtraEditors.SimpleButton();
+            this.lessOrEqualButton = new DevExpress.XtraEditors.SimpleButton();
+            this.moreOrEqualButton = new DevExpress.XtraEditors.SimpleButton();
+            this.equalButton = new DevExpress.XtraEditors.SimpleButton();
+            this.noEqualButton = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.AgridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AgridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BgridControl)).BeginInit();
@@ -79,9 +83,11 @@
             // 
             // AgridControl
             // 
+            this.tablePanel5.SetColumn(this.AgridControl, 0);
             this.AgridControl.Location = new System.Drawing.Point(3, 22);
             this.AgridControl.MainView = this.AgridView;
             this.AgridControl.Name = "AgridControl";
+            this.tablePanel5.SetRow(this.AgridControl, 1);
             this.AgridControl.Size = new System.Drawing.Size(204, 170);
             this.AgridControl.TabIndex = 0;
             this.AgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -99,9 +105,11 @@
             // 
             // BgridControl
             // 
+            this.tablePanel5.SetColumn(this.BgridControl, 0);
             this.BgridControl.Location = new System.Drawing.Point(3, 223);
             this.BgridControl.MainView = this.BgridView;
             this.BgridControl.Name = "BgridControl";
+            this.tablePanel5.SetRow(this.BgridControl, 3);
             this.BgridControl.Size = new System.Drawing.Size(204, 150);
             this.BgridControl.TabIndex = 1;
             this.BgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -119,9 +127,11 @@
             // 
             // CgridControl
             // 
+            this.tablePanel5.SetColumn(this.CgridControl, 0);
             this.CgridControl.Location = new System.Drawing.Point(3, 444);
             this.CgridControl.MainView = this.CgridView;
             this.CgridControl.Name = "CgridControl";
+            this.tablePanel5.SetRow(this.CgridControl, 6);
             this.CgridControl.Size = new System.Drawing.Size(204, 153);
             this.CgridControl.TabIndex = 2;
             this.CgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -139,24 +149,30 @@
             // 
             // labelControl1
             // 
+            this.tablePanel5.SetColumn(this.labelControl1, 0);
             this.labelControl1.Location = new System.Drawing.Point(3, 3);
             this.labelControl1.Name = "labelControl1";
+            this.tablePanel5.SetRow(this.labelControl1, 0);
             this.labelControl1.Size = new System.Drawing.Size(74, 13);
             this.labelControl1.TabIndex = 3;
             this.labelControl1.Text = "Множество А :";
             // 
             // labelControl2
             // 
+            this.tablePanel5.SetColumn(this.labelControl2, 0);
             this.labelControl2.Location = new System.Drawing.Point(3, 201);
             this.labelControl2.Name = "labelControl2";
+            this.tablePanel5.SetRow(this.labelControl2, 2);
             this.labelControl2.Size = new System.Drawing.Size(73, 13);
             this.labelControl2.TabIndex = 4;
             this.labelControl2.Text = "Множество B :";
             // 
             // labelControl3
             // 
+            this.tablePanel5.SetColumn(this.labelControl3, 0);
             this.labelControl3.Location = new System.Drawing.Point(3, 424);
             this.labelControl3.Name = "labelControl3";
+            this.tablePanel5.SetRow(this.labelControl3, 5);
             this.labelControl3.Size = new System.Drawing.Size(74, 13);
             this.labelControl3.TabIndex = 5;
             this.labelControl3.Text = "Множество C :";
@@ -255,15 +271,18 @@
             this.compareButton.Location = new System.Drawing.Point(3, 3);
             this.compareButton.Name = "compareButton";
             this.tablePanel2.SetRow(this.compareButton, 0);
-            this.compareButton.Size = new System.Drawing.Size(90, 30);
+            this.compareButton.Size = new System.Drawing.Size(90, 27);
             this.compareButton.TabIndex = 13;
             this.compareButton.Text = "Сравнить";
             this.compareButton.Click += new System.EventHandler(this.compareButton_Click);
             // 
             // chartControl
             // 
+            this.tablePanel5.SetColumn(this.chartControl, 2);
             this.chartControl.Location = new System.Drawing.Point(315, 3);
             this.chartControl.Name = "chartControl";
+            this.tablePanel5.SetRow(this.chartControl, 0);
+            this.tablePanel5.SetRowSpan(this.chartControl, 6);
             this.chartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.chartControl.Size = new System.Drawing.Size(539, 435);
             this.chartControl.TabIndex = 21;
@@ -305,6 +324,7 @@
             // 
             // tablePanel1
             // 
+            this.tablePanel5.SetColumn(this.tablePanel1, 1);
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.77F)});
             this.tablePanel1.Controls.Add(this.buildAButton);
@@ -313,6 +333,7 @@
             this.tablePanel1.Controls.Add(this.buildBButton);
             this.tablePanel1.Location = new System.Drawing.Point(213, 462);
             this.tablePanel1.Name = "tablePanel1";
+            this.tablePanel5.SetRow(this.tablePanel1, 6);
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 35F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 35F),
@@ -335,6 +356,7 @@
             // 
             // tablePanel3
             // 
+            this.tablePanel5.SetColumn(this.tablePanel3, 0);
             this.tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 83F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 83F),
@@ -346,6 +368,7 @@
             this.tablePanel3.Controls.Add(this.plusButton);
             this.tablePanel3.Location = new System.Drawing.Point(3, 380);
             this.tablePanel3.Name = "tablePanel3";
+            this.tablePanel5.SetRow(this.tablePanel3, 4);
             this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel3.Size = new System.Drawing.Size(204, 38);
@@ -353,6 +376,7 @@
             // 
             // tablePanel4
             // 
+            this.tablePanel5.SetColumn(this.tablePanel4, 2);
             this.tablePanel4.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 23.84F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 36.16F),
@@ -363,6 +387,7 @@
             this.tablePanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.tablePanel4.Location = new System.Drawing.Point(315, 444);
             this.tablePanel4.Name = "tablePanel4";
+            this.tablePanel5.SetRow(this.tablePanel4, 6);
             this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 39F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
@@ -375,13 +400,13 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26.96F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 13.15F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 69.89F)});
+            this.tablePanel5.Controls.Add(this.tablePanel2);
             this.tablePanel5.Controls.Add(this.labelControl1);
             this.tablePanel5.Controls.Add(this.chartControl);
             this.tablePanel5.Controls.Add(this.tablePanel4);
             this.tablePanel5.Controls.Add(this.labelControl2);
             this.tablePanel5.Controls.Add(this.tablePanel1);
             this.tablePanel5.Controls.Add(this.tablePanel3);
-            this.tablePanel5.Controls.Add(this.tablePanel2);
             this.tablePanel5.Controls.Add(this.labelControl3);
             this.tablePanel5.Controls.Add(this.CgridControl);
             this.tablePanel5.Controls.Add(this.AgridControl);
@@ -400,47 +425,119 @@
             this.tablePanel5.Size = new System.Drawing.Size(857, 600);
             this.tablePanel5.TabIndex = 30;
             // 
+            // lessButton
+            // 
+            this.lessButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.lessButton.Appearance.Options.UseBackColor = true;
+            this.lessButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.lessButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.lessButton, 0);
+            this.lessButton.Enabled = false;
+            this.lessButton.Location = new System.Drawing.Point(3, 41);
+            this.lessButton.Name = "lessButton";
+            this.tablePanel2.SetRow(this.lessButton, 1);
+            this.lessButton.Size = new System.Drawing.Size(41, 23);
+            this.lessButton.TabIndex = 31;
+            this.lessButton.Text = "<";
+            // 
             // tablePanel2
             // 
             this.tablePanel5.SetColumn(this.tablePanel2, 1);
             this.tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 48F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 48F)});
-            this.tablePanel2.Controls.Add(this.richTextBox);
-            this.tablePanel2.Controls.Add(this.compareLabel);
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 29.18F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 30.82F)});
+            this.tablePanel2.Controls.Add(this.noEqualButton);
+            this.tablePanel2.Controls.Add(this.equalButton);
+            this.tablePanel2.Controls.Add(this.moreOrEqualButton);
+            this.tablePanel2.Controls.Add(this.lessOrEqualButton);
+            this.tablePanel2.Controls.Add(this.moreButton);
+            this.tablePanel2.Controls.Add(this.lessButton);
             this.tablePanel2.Controls.Add(this.compareButton);
-            this.tablePanel2.Location = new System.Drawing.Point(213, 35);
+            this.tablePanel2.Location = new System.Drawing.Point(213, 37);
             this.tablePanel2.Name = "tablePanel2";
             this.tablePanel5.SetRow(this.tablePanel2, 1);
             this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 36F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 44F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 36F)});
-            this.tablePanel2.Size = new System.Drawing.Size(96, 144);
-            this.tablePanel2.TabIndex = 27;
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 39F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel2.Size = new System.Drawing.Size(96, 140);
+            this.tablePanel2.TabIndex = 32;
             // 
-            // compareLabel
+            // moreButton
             // 
-            this.tablePanel2.SetColumn(this.compareLabel, 0);
-            this.tablePanel2.SetColumnSpan(this.compareLabel, 2);
-            this.compareLabel.Location = new System.Drawing.Point(3, 43);
-            this.compareLabel.Name = "compareLabel";
-            this.tablePanel2.SetRow(this.compareLabel, 1);
-            this.compareLabel.Size = new System.Drawing.Size(0, 13);
-            this.compareLabel.TabIndex = 30;
+            this.moreButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.moreButton.Appearance.Options.UseBackColor = true;
+            this.moreButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.moreButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.moreButton, 1);
+            this.moreButton.Enabled = false;
+            this.moreButton.Location = new System.Drawing.Point(50, 41);
+            this.moreButton.Name = "moreButton";
+            this.tablePanel2.SetRow(this.moreButton, 1);
+            this.moreButton.Size = new System.Drawing.Size(43, 23);
+            this.moreButton.TabIndex = 33;
+            this.moreButton.Text = ">";
             // 
-            // richTextBox
+            // lessOrEqualButton
             // 
-            this.tablePanel2.SetColumn(this.richTextBox, 0);
-            this.tablePanel2.SetColumnSpan(this.richTextBox, 2);
-            this.richTextBox.Location = new System.Drawing.Point(3, 67);
-            this.richTextBox.Name = "richTextBox";
-            this.tablePanel2.SetRow(this.richTextBox, 2);
-            this.tablePanel2.SetRowSpan(this.richTextBox, 2);
-            this.richTextBox.Size = new System.Drawing.Size(90, 74);
-            this.richTextBox.TabIndex = 31;
-            this.richTextBox.Text = "";
+            this.lessOrEqualButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.lessOrEqualButton.Appearance.Options.UseBackColor = true;
+            this.lessOrEqualButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.lessOrEqualButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.lessOrEqualButton, 0);
+            this.lessOrEqualButton.Enabled = false;
+            this.lessOrEqualButton.Location = new System.Drawing.Point(3, 76);
+            this.lessOrEqualButton.Name = "lessOrEqualButton";
+            this.tablePanel2.SetRow(this.lessOrEqualButton, 2);
+            this.lessOrEqualButton.Size = new System.Drawing.Size(41, 23);
+            this.lessOrEqualButton.TabIndex = 34;
+            this.lessOrEqualButton.Text = "<=";
+            // 
+            // moreOrEqualButton
+            // 
+            this.moreOrEqualButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.moreOrEqualButton.Appearance.Options.UseBackColor = true;
+            this.moreOrEqualButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.moreOrEqualButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.moreOrEqualButton, 1);
+            this.moreOrEqualButton.Enabled = false;
+            this.moreOrEqualButton.Location = new System.Drawing.Point(50, 76);
+            this.moreOrEqualButton.Name = "moreOrEqualButton";
+            this.tablePanel2.SetRow(this.moreOrEqualButton, 2);
+            this.moreOrEqualButton.Size = new System.Drawing.Size(43, 23);
+            this.moreOrEqualButton.TabIndex = 35;
+            this.moreOrEqualButton.Text = ">=";
+            // 
+            // equalButton
+            // 
+            this.equalButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.equalButton.Appearance.Options.UseBackColor = true;
+            this.equalButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.equalButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.equalButton, 0);
+            this.equalButton.Enabled = false;
+            this.equalButton.Location = new System.Drawing.Point(3, 110);
+            this.equalButton.Name = "equalButton";
+            this.tablePanel2.SetRow(this.equalButton, 3);
+            this.equalButton.Size = new System.Drawing.Size(41, 23);
+            this.equalButton.TabIndex = 36;
+            this.equalButton.Text = "=";
+            // 
+            // noEqualButton
+            // 
+            this.noEqualButton.Appearance.BackColor = System.Drawing.Color.Red;
+            this.noEqualButton.Appearance.Options.UseBackColor = true;
+            this.noEqualButton.AppearanceDisabled.ForeColor = System.Drawing.Color.White;
+            this.noEqualButton.AppearanceDisabled.Options.UseForeColor = true;
+            this.tablePanel2.SetColumn(this.noEqualButton, 1);
+            this.noEqualButton.Enabled = false;
+            this.noEqualButton.Location = new System.Drawing.Point(50, 110);
+            this.noEqualButton.Name = "noEqualButton";
+            this.tablePanel2.SetRow(this.noEqualButton, 3);
+            this.noEqualButton.Size = new System.Drawing.Size(43, 23);
+            this.noEqualButton.TabIndex = 37;
+            this.noEqualButton.Text = "!=";
             // 
             // FuzzyNumbersControl
             // 
@@ -468,7 +565,6 @@
             this.tablePanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
-            this.tablePanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -501,8 +597,12 @@
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.Utils.Layout.TablePanel tablePanel3;
         private DevExpress.XtraEditors.SimpleButton buildAButton;
+        private DevExpress.XtraEditors.SimpleButton lessButton;
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
-        private DevExpress.XtraEditors.LabelControl compareLabel;
-        private System.Windows.Forms.RichTextBox richTextBox;
+        private DevExpress.XtraEditors.SimpleButton noEqualButton;
+        private DevExpress.XtraEditors.SimpleButton equalButton;
+        private DevExpress.XtraEditors.SimpleButton moreOrEqualButton;
+        private DevExpress.XtraEditors.SimpleButton lessOrEqualButton;
+        private DevExpress.XtraEditors.SimpleButton moreButton;
     }
 }

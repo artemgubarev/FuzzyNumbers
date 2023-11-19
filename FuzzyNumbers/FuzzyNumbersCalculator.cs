@@ -4,187 +4,131 @@ using System.Linq;
 
 namespace FuzzyNumbers
 {
+    internal class ArrayComparer<T> : IEqualityComparer<T[]>
+    {
+        private readonly Func<T[], T> _elementSelector;
+
+        public ArrayComparer(Func<T[], T> elementSelector)
+        {
+            _elementSelector = elementSelector ?? throw new ArgumentNullException(nameof(elementSelector));
+        }
+
+        public bool Equals(T[] x, T[] y)
+        {
+            // Сравниваем только выбранный элемент
+            return EqualityComparer<T>.Default.Equals(_elementSelector(x), _elementSelector(y));
+        }
+
+        public int GetHashCode(T[] obj)
+        {
+            // Генерируем хэш-код только для выбранного элемента
+            return EqualityComparer<T>.Default.GetHashCode(_elementSelector(obj));
+        }
+    }
+
     internal class FuzzyNumbersCalculator
     {
         internal static IEnumerable<double[]> ExecuteOperation(IEnumerable<double[]> A, IEnumerable<double[]> B,string operation)
         {
-            var a = A.ToArray();
-            var b = B.ToArray();
+            var comparer = new ArrayComparer<double>(x => x[0]);
+            var levelsOnlyInA = A.Except(B, comparer);
+            var levelsOnlyInB = B.Except(A, comparer);
 
-            var levels = new HashSet<double>();
-            var aLevels = new List<double>();
-            var bLevels = new List<double>();
+            A = AddLevels(A, levelsOnlyInB);
+            B = AddLevels(B, levelsOnlyInA);
 
-            for (int i = 0; i < a.GetLength(0); i++)
-            {
-                levels.Add(a[i][0]);
-                aLevels.Add(a[i][0]);
-            }
-            for (int i = 0; i < b.GetLength(0); i++)
-            {
-                levels.Add(b[i][0]);
-                bLevels.Add(b[i][0]);
-            }
-
-            foreach (var level in levels)
-            {
-                if (!aLevels.Contains(level))
+           var operations = new Dictionary<string, Func<double, double, double>>()
                 {
-                    a = SetLevel(a, level).ToArray();
-                }
+                {"+", (x,y) => x+y },
+                {"-", (x,y) => x-y },
+                {"/", (x,y) => x/y },
+                {"*", (x,y) => x*y },
+                };
 
-                if (!bLevels.Contains(level))
-                {
-                    b = SetLevel(b, level).ToArray();
-                }
-            }
-
-            if (operation == "+")
-            {
-                return Plus(a, b);
-            }
-            if (operation == "-")
-            {
-                return Minus(a, b);
-            }
-            if (operation == "*")
-            {
-                return Mult(a, b);
-            }
-            if (operation == "/")
-            {
-                return Div(a, b);
-            }
-
-            return null;
+            var results = ExecuteOperation(A, B, operations[operation]);
+            return results;
         }
 
-        private static IEnumerable<double[]> Plus(IEnumerable<double[]> A, IEnumerable<double[]> B)
+        private static IEnumerable<double[]> ExecuteOperation(IEnumerable<double[]> A, IEnumerable<double[]> B,  Func<double, double, double> operation)
         {
             var a = A.ToArray();
             var b = B.ToArray();
-
-            var c = new List<double[]>();
-
-            for (int i = 0; i < a.GetLength(0); i++)
+            int length = a.GetLength(0);
+            var c = new double[length][];
+            for (int i = 0; i < length; i++)
             {
-                double[] values = new double[3];
-                values[0] = a[i][0];
-                values[1] = a[i][1] + b[i][1];
-                values[2] = a[i][2] + b[i][2];
-                c.Add(values);
+                // alpha, нижняя, верхняя
+                var result = new double[3];
+                result[0] = a[i][0];
+                result[1] = operation(a[i][1], b[i][1]);
+                result[2] = operation(a[i][2], b[i][2]);
+                c[i] = result;
             }
-
             return c;
         }
 
-        private static IEnumerable<double[]> Minus(IEnumerable<double[]> A, IEnumerable<double[]> B)
+        internal static IEnumerable<string> Compare(IEnumerable<double[]> A, IEnumerable<double[]> B)
         {
             var a = A.ToArray();
             var b = B.ToArray();
-
-            var c = new List<double[]>();
-
-            for (int i = 0; i < a.GetLength(0); i++)
-            {
-                double[] values = new double[3];
-                values[0] = a[i][0];
-                values[1] = a[i][1] - b[i][1];
-                values[2] = a[i][2] - b[i][2];
-                c.Add(values);
-            }
-
-            return c;
-        }
-
-        private static IEnumerable<double[]> Div(IEnumerable<double[]> A, IEnumerable<double[]> B)
-        {
-            var a = A.ToArray();
-            var b = B.ToArray();
-
-            var c = new List<double[]>();
-
-            for (int i = 0; i < a.GetLength(0); i++)
-            {
-                double[] values = new double[3];
-                values[0] = a[i][0];
-                values[1] = a[i][1] / b[i][1];
-                values[2] = a[i][2] / b[i][2];
-                c.Add(values);
-            }
-
-            return c;
-        }
-
-        private static IEnumerable<double[]> Mult(IEnumerable<double[]> A, IEnumerable<double[]> B)
-        {
-            var a = A.ToArray();
-            var b = B.ToArray();
-
-            var c = new List<double[]>();
-
-            for (int i = 0; i < a.GetLength(0); i++)
-            {
-                double[] values = new double[3];
-                values[0] = a[i][0];
-                values[1] = a[i][1] * b[i][1];
-                values[2] = a[i][2] * b[i][2];
-                c.Add(values);
-            }
-
-            return c;
-        }
-
-        public static string Compare(IEnumerable<double[]> A, IEnumerable<double[]> B)
-        {
-            var a = A.ToArray();
-            var b = B.ToArray();
-
-            double sumA = 0; double sumB = 0;
-            for (int i = 0; i < 3; i++)
+            double sumA = 0; 
+            double sumB = 0;
+            for (int i = 0; i < a.Length; i++)
             {
                 sumA += a[i][1] + a[i][2];
-
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < b.Length; i++)
             {
                 sumB += b[i][1] + b[i][2];
             }
-            sumA = sumA / 3;
-            sumB = sumB / 4;
-            String result = "";
-            if (sumA == sumB) result += "=\n>=\n<=\n";
+            sumA /= a.Length;
+            sumB /= b.Length;
+            var result = new List<string>();
+            if (sumA == sumB)
+            {
+                result.AddRange(new[] { "=", ">=", "<=" });
+            }
             else
             {
-                if (sumA > sumB) result += ">\n!=\n>=";
-                else result += "<\n!=\n<=";
+                if (sumA > sumB)
+                {
+                    result.AddRange(new[] { ">", "!=", ">=" });
+                }
+                else
+                {
+                    result.AddRange(new[] { "<", "!=", "<=" });
+                }
             }
-
-            return "множество A\n" + Convert.ToString(result) + "\nмножество B";
+            return result;
         }
 
-        private static IEnumerable<double[]> SetLevel(IEnumerable<double[]> matrix, double newLevel)
+        private static IEnumerable<double[]> AddLevels(IEnumerable<double[]> matrix, IEnumerable<double[]> newRows)
         {
-            var set = matrix.ToList();
+            var matrixList = matrix.ToList();
+            foreach (var row in newRows)
+            {
+                double level = row[0];
 
-            double x1 = set[0][1];
-            double y1 = set[0][0];
-            double x2 = set[1][1];
-            double y2 = set[1][0];
+                double x1 = matrixList[0][1];
+                double y1 = matrixList[0][0];
+                double x2 = matrixList[1][1];
+                double y2 = matrixList[1][0];
 
-            double newXleft;
-            double newXright;
+                double newXleft;
+                double newXright;
 
-            newXleft = Inter(x1, y1, x2, y2, newLevel);
-            x1 = set[0][2];
-            y1 = set[0][0];
-            x2 = set[1][2];
-            y2 = set[1][0];
+                newXleft = Inter(x1, y1, x2, y2, level);
+                x1 = matrixList[0][2];
+                y1 = matrixList[0][0];
+                x2 = matrixList[1][2];
+                y2 = matrixList[1][0];
 
-            newXright = Inter(x1, y1, x2, y2, newLevel);
+                newXright = Inter(x1, y1, x2, y2, level);
 
-            set.Add(new double[]{newLevel, newXleft, newXright});
-            return set;
+                matrixList.Add(new double[] { level, newXleft, newXright });
+            }
+
+            return matrixList;
         }
 
         private static double Inter(double x1, double y1, double x2, double y2, double newLevel)
